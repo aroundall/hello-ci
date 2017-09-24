@@ -20,9 +20,13 @@ pipeline {
         stage('Deploy') {
             steps {
                 // for ssh-key security, otherwise, it will be failed to connect with ssh.
-                sh 'cd ansible'
-                sh 'chmod 400 ./ssh/id_rsa'
-                sh 'ansible-playbook playbook.yml'
+                dir ('ansible') {
+                    sh 'chmod 400 ./ssh/id_rsa'
+                    sh 'ansible-playbook playbook.yml'
+                }
+                dir ('../') {
+                    // nothing for here.
+                }
             }
         }
     }
