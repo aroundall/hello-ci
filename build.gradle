@@ -16,6 +16,7 @@ apply plugin: 'application'
 apply plugin: 'org.springframework.boot'
 
 group = 'org.amuji'
+archivesBaseName = 'hello-ci'
 version = '0.0.1'
 sourceCompatibility = 1.8
 
