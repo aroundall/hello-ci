@@ -20,7 +20,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'chmod 400 ssh/id_rsa'
-                sh 'ansible dev -m setup'
+                sh 'ansible-playbook playbook.yml'
                 // stop remote service
                 // copy artifact
                 // start remote service
