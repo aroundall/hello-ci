@@ -16,7 +16,7 @@
 
     - name: Copy artifact to remote server
       copy:
-        src: build/libs/{{app_id}}-0.0.1.jar
+        src: ../build/libs/{{app_id}}-0.0.1.jar
         dest: ~/{{app_id}}.jar
         mode: 0644
 
