@@ -21,6 +21,4 @@
         mode: 0644
 
     - name: Run app
-      command: nohup java -jar {{app_id}}.jar 1>{{app_id}}.log 2>&1 &
-      args:
-        chdir: ~/
+      shell: cd ~/; nohup java -jar {{app_id}}.jar 1>{{app_id}}.log 2>&1 &
