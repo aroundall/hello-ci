@@ -1,15 +1,26 @@
 ---
 - name: Deploy app on remote server
   hosts: dev
-#  become: True
+  vars:
+    app_id: hello-ci
   tasks:
+    - name: check if the app is runing?
+      command: pgrep -f "java -jar {{app_id}}.jar"
+      register: app_pid
+    - debug:
+        msg: "The process ID (s): {{app_pid}}"
+
+    - name: terminate the app
+      command: kill -9 {{app_pid.stdout}}
+      when: app_pid.stdout != ""
+
     - name: Copy artifact to remote server
       copy:
-        src: build/libs/hello-ci-0.0.1.jar
-        dest: ~/hello-ci.jar
+        src: build/libs/{{app_id}}-0.0.1.jar
+        dest: ~/{{app_id}}.jar
         mode: 0644
 
     - name: Run app
-      command: java -jar hello-ci.jar
+      command: nohup java -jar {{app_id}}.jar 1>{{app_id}}.log 2>&1 &
       args:
         chdir: ~/
