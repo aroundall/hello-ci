@@ -19,11 +19,9 @@ pipeline {
         }
         stage('Deploy') {
             steps {
+                // for ssh-key security, otherwise, it will be failed to connect with ssh.
                 sh 'chmod 400 ssh/id_rsa'
                 sh 'ansible-playbook playbook.yml'
-                // stop remote service
-                // copy artifact
-                // start remote service
             }
         }
     }
