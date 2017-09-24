@@ -1,1 +1,15 @@
 ---
+- name: Deploy app on remote server
+  hosts: dev
+#  become: True
+  tasks:
+    - name: Copy artifact to remote server
+      copy:
+        src: build/libs/hello-ci-0.0.1.jar
+        dest: ~/hello-ci.jar
+        mode: 0644
+
+    - name: Run app
+      command: java -jar hello-ci.jar
+      args:
+        chdir: ~/
