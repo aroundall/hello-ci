@@ -17,5 +17,13 @@ pipeline {
                 archive 'build/libs/**/*.jar'
             }
         }
+        stage('Deploy') {
+            steps {
+                sh 'ansible dev -m setup'
+                // stop remote service
+                // copy artifact
+                // start remote service
+            }
+        }
     }
 }
