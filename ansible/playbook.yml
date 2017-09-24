@@ -7,6 +7,7 @@
     - name: check if the app is runing?
       command: pgrep -f "java -jar {{app_id}}.jar"
       register: app_pid
+      failed_when: "'FAILED' in app_pid.stderr"
     - debug:
         msg: "The process ID (s): {{app_pid}}"
 
